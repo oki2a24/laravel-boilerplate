@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: ./docker/php
+    environment:
+      - APP_AXIOS_BASEURL=${APP_AXIOS_BASEURL}
+      - DATABASE_URL=pgsql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_DATABASE}?charset=utf8&prefix_indexes=true&schema=public&sslmode=prefer
+      - LANG=C.UTF-8
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php/ssl/private_key.pem:/etc/ssl/private/private_key.pem
+      - ./docker/php/ssl/certificate.pem:/etc/ssl/certs/certificate.pem
+    ports:
+      - "80:80"
+      - "443:443"
+
+  db:
+    build:
+      context: ./docker/postgres
+    environment:
+      - LANG=C.UTF-8
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C.UTF-8
+      - TZ=Asia/Tokyo
