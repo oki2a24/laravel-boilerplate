@@ -14,5 +14,9 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 ## TODO
 - [x] Docker Compose 環境を構築する
     - [ ] apache2 起動時のワーニングを解消する
-- [ ] Laravel をインストールする
-- [ ] Laravel で Vite を使えるようにする
+- [x] Laravel をインストールする
+- [x] Laravel で Vite を使えるようにする
+- [ ] ESLint
+- [ ] Prettier
+- [ ] PHP CS Fixer
+- [ ] Larastan
