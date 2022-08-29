@@ -23,3 +23,4 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 - [ ] PHP CS Fixer
 - [ ] Larastan
 - [ ] Health エンドポイント
+- [ ] VS Code Container

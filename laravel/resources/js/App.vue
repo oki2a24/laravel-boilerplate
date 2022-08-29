@@ -1,9 +1,9 @@
 <template>
-    <h1>App.vue</h1>
+  <h1>App.vue</h1>
 </template>
 
 <script>
-    export default {
-        name: "App",
-    }
+export default {
+  name: "App",
+};
 </script>
