@@ -16,11 +16,11 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
     - [ ] apache2 起動時のワーニングを解消する
 - [x] Laravel をインストールする
 - [x] Laravel で Vite を使えるようにする
-- [ ] ESLint Prettier
+- [x] ESLint Prettier
     - 参考: 
         - https://github.com/vitejs/awesome-vite#vue-3
         - https://github.com/oki2a24/laravel8-boilerplate/tree/main/laravel
-- [ ] PHP CS Fixer
+- [x] PHP CS Fixer
 - [ ] Larastan
-- [ ] Health エンドポイント
 - [ ] VS Code Container
+- [ ] Health エンドポイント
