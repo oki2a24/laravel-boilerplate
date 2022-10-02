@@ -25,9 +25,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libicu-dev=67.1-7 \
   libjpeg-dev=1:2.0.6-4 \
   libpng-dev=1.6.37-3 \
-  libpq-dev=13.7-0+deb11u1 \
+  libpq-dev=13.8-0+deb11u1 \
   libzip-dev=1.7.3-1 \
-  unzip=6.0-26 \
+  unzip=6.0-26+deb11u1 \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-configure \
   gd --with-jpeg \
