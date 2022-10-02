@@ -21,6 +21,7 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
         - https://github.com/vitejs/awesome-vite#vue-3
         - https://github.com/oki2a24/laravel8-boilerplate/tree/main/laravel
 - [x] PHP CS Fixer
+- [x] Vue Router
 - [ ] Larastan
 - [ ] VS Code Container
 - [ ] Health エンドポイント
