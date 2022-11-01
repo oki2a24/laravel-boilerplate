@@ -22,6 +22,8 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
         - https://github.com/oki2a24/laravel8-boilerplate/tree/main/laravel
 - [x] PHP CS Fixer
 - [x] Vue Router
+- [x] Dev Container
+- [ ] laravel/pint へ移行
 - [ ] Larastan
 - [ ] VS Code Container
 - [ ] Health エンドポイント
