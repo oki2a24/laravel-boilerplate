@@ -70,6 +70,8 @@ RUN ln -sf /dev/stdout /var/log/cron
 RUN apt-get update && apt-get install -y --no-install-recommends \
   supervisor=4.2.2-2 \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
-COPY ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN cp -a /etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf.org
+COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./supervisor/conf.d/ /etc/supervisor/conf.d/
 
 CMD ["/usr/bin/supervisord"]

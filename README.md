@@ -25,4 +25,6 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 - [x] VS Code Dev Container
 - [x] laravel/pint へ移行
 - [x] Larastan
+- [ ] Supervisor の設定を見直す
+- [ ] root でないユーザーで Supervisor を動かす → crond は root で動かすことが前提と考えるとこれは不要かもしれない
 - [ ] Health エンドポイント
