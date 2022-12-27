@@ -1,5 +1,5 @@
-FROM composer:2.3.10 AS composer
-FROM php:8.1.9-apache AS shared
+FROM composer:2.4.4 AS composer
+FROM php:8.2.0-apache AS shared
 
 # user, group
 ARG USERNAME=app
@@ -10,7 +10,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  git=1:2.30.2-1 \
+  git=1:2.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Node.js
@@ -22,12 +22,12 @@ RUN curl -o nodejs.deb https://deb.nodesource.com/node_18.x/pool/main/n/nodejs/n
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  libicu-dev=67.1-7 \
-  libjpeg-dev=1:2.0.6-4 \
-  libpng-dev=1.6.37-3 \
-  libpq-dev=13.8-0+deb11u1 \
-  libzip-dev=1.7.3-1 \
-  unzip=6.0-26+deb11u1 \
+  libicu-dev=67.* \
+  libjpeg-dev=1:2.* \
+  libpng-dev=1.* \
+  libpq-dev=13.* \
+  libzip-dev=1.* \
+  unzip=6.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-configure \
   gd --with-jpeg \
@@ -61,14 +61,14 @@ RUN a2ensite my-ssl \
 
 # cron
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  busybox-static=1:1.30.1-6+b3 \
+  busybox-static=1:1.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY ./crontabs/app /var/spool/cron/crontabs/app
 RUN ln -sf /dev/stdout /var/log/cron
 
 # Supervisor
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  supervisor=4.2.2-2 \
+  supervisor=4.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN cp -a /etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf.org
 COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
