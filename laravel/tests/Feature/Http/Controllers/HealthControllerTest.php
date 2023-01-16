@@ -2,21 +2,23 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class HealthControllerTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * @test
      *
      * @return void
      */
-    public function test_example()
+    public function 自身が生存している場合は相当するレスポンスを返すこと(): void
     {
-        $response = $this->get('/');
+        $response = $this->getJson('/api/health');
 
-        $response->assertStatus(200);
+        $response
+        ->assertStatus(200)
+        ->assertExactJson([
+            'status' => 'pass',
+        ]);
     }
 }
