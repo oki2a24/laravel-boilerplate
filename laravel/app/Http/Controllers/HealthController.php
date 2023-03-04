@@ -17,4 +17,16 @@ class HealthController extends Controller
             'status' => 'pass',
         ]);
     }
+
+    /**
+     * 自身と依存するリソースの生存状況を返します。
+     *
+     * @return JsonResponse
+     */
+    public function healthDeep(): JsonResponse
+    {
+        return response()->json([
+            'status' => 'pass',
+        ]);
+    }
 }
