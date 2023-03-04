@@ -8,8 +8,6 @@ class HealthControllerTest extends TestCase
 {
     /**
      * @test
-     *
-     * @return void
      */
     public function 自身が生存している場合は相当するレスポンスを返すこと(): void
     {
