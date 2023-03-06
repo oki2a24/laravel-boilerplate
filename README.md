@@ -28,4 +28,15 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 - [x] Supervisor の設定を見直す
 - [x] ~~root でないユーザーで Supervisor を動かす~~ → crond は root で動かすことが前提と考えるとこれは不要かもしれない
 - [x] app 用の cron
-- [ ] Health エンドポイント
+- [x] Health エンドポイント
+- [ ] Makefile を導入する
+- [ ] https://github.com/barryvdh/laravel-ide-helper を導入する
+- [ ] Xdebug ステップデバッギングを可能にする
+- [ ] VS Code 連携を強化する
+  - [ ] Dev Container 設定ファイルのフォーマット変更へ対応する
+  - [ ] Prettier と連携する
+  - [ ] ESLint と連携する
+- [ ] Laravel 10 へアップグレードする
+- [ ] MSW を導入する https://mswjs.io/docs/getting-started/install
+- [ ] Storybook を導入する
+- [ ] メニューとして https://getbootstrap.jp/docs/5.0/getting-started/introduction/ 等の上と左メニューを再現する
