@@ -14,9 +14,9 @@ class HealthControllerTest extends TestCase
         $response = $this->getJson('/api/health');
 
         $response
-        ->assertStatus(200)
-        ->assertExactJson([
-            'status' => 'pass',
-        ]);
+            ->assertStatus(200)
+            ->assertExactJson([
+                'status' => 'pass',
+            ]);
     }
 }
