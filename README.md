@@ -29,8 +29,8 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 - [x] ~~root でないユーザーで Supervisor を動かす~~ → crond は root で動かすことが前提と考えるとこれは不要かもしれない
 - [x] app 用の cron
 - [x] Health エンドポイント
-- [ ] Makefile を導入する
-- [ ] https://github.com/barryvdh/laravel-ide-helper を導入する
+- [x] Makefile を導入する
+- [x] https://github.com/barryvdh/laravel-ide-helper を導入する
 - [ ] Xdebug ステップデバッギングを可能にする
 - [ ] VS Code 連携を強化する
   - [ ] Dev Container 設定ファイルのフォーマット変更へ対応する
