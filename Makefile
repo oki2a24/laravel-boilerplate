@@ -16,7 +16,7 @@ php-test:
 	docker-compose exec --user=app app php artisan test
 
 npm-dev:
-	docker-compose exec --user=app app npm dev
+	docker-compose exec --user=app app npm run dev
 npm-lint-format: npm-lint npm-format
 npm-lint:
 	docker-compose exec --user=app app npm run lint
