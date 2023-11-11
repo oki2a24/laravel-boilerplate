@@ -31,6 +31,7 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
 - [x] Health エンドポイント
 - [x] Makefile を導入する
 - [x] https://github.com/barryvdh/laravel-ide-helper を導入する
+- [x] Bootstrap5 を導入する
 - [ ] Xdebug ステップデバッギングを可能にする
 - [ ] VS Code 連携を強化する
   - [ ] Dev Container 設定ファイルのフォーマット変更へ対応する
