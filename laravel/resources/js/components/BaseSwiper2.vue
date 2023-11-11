@@ -19,9 +19,7 @@
             <swiper-slide v-for="(image, index) in images" :key="index">
               <figure class="slide">
                 <div class="slide-media"><img :src="image" alt="" /></div>
-                <figcaption class="slide-title">
-                  index: {{ index }} 番目の画像。
-                </figcaption>
+                <figcaption class="slide-title">index: {{ index }} 番目の画像。</figcaption>
               </figure>
             </swiper-slide>
             <template #container-end>
@@ -46,9 +44,7 @@
             <swiper-slide v-for="(image, index) in images" :key="index">
               <div class="thumb-media"><img :src="image" alt="" /></div>
             </swiper-slide>
-            <template #container-end
-              ><div class="swiper-scrollbar"></div
-            ></template>
+            <template #container-end><div class="swiper-scrollbar"></div></template>
           </swiper>
         </div>
       </div>
@@ -91,19 +87,14 @@ const modules = [EffectFade, Navigation, Scrollbar, Thumbs];
   --color-gray: #ddd;
   --color-theme: #f5695f;
   --color-theme-darken: #f12617;
-  --box-shadow: 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.05),
-    -0.8rem -0.8rem 1.2rem #fff;
-  --box-shadow-hover: 1rem 1rem 1.5rem rgba(0, 0, 0, 0.08),
-    -1rem -1rem 1.5rem #fff;
-  --box-shadow-inset: inset 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.05),
-    inset -0.8rem -0.8rem 1.2rem #fff;
-  --box-shadow-dark: 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.1),
-    -0.8rem -0.8rem 1.2rem rgba(#fff, 0.2);
+  --box-shadow: 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.05), -0.8rem -0.8rem 1.2rem #fff;
+  --box-shadow-hover: 1rem 1rem 1.5rem rgba(0, 0, 0, 0.08), -1rem -1rem 1.5rem #fff;
+  --box-shadow-inset: inset 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.05), inset -0.8rem -0.8rem 1.2rem #fff;
+  --box-shadow-dark: 0.8rem 0.8rem 1.2rem rgba(0, 0, 0, 0.1), -0.8rem -0.8rem 1.2rem rgba(#fff, 0.2);
 }
 
 html {
-  font-family: "Spartan", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic",
-    "メイリオ", Meiryo, sans-serif;
+  font-family: "Spartan", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, sans-serif;
   font-size: 62.5%;
   line-height: 1.8;
   height: 100%;

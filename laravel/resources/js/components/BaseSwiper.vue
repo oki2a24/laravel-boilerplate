@@ -10,9 +10,7 @@
     :modules="modules"
     class="mySwiper2"
   >
-    <swiper-slide v-for="(image, index) in images" :key="index"
-      ><img :src="image"
-    /></swiper-slide>
+    <swiper-slide v-for="(image, index) in images" :key="index"><img :src="image" /></swiper-slide>
   </swiper>
   <swiper
     :space-between="10"
@@ -23,9 +21,7 @@
     class="mySwiper"
     @swiper="setThumbsSwiper"
   >
-    <swiper-slide v-for="(image, index) in images" :key="index"
-      ><img :src="image"
-    /></swiper-slide>
+    <swiper-slide v-for="(image, index) in images" :key="index"><img :src="image" /></swiper-slide>
   </swiper>
 </template>
 <script setup>
