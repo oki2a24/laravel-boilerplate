@@ -16,6 +16,7 @@ class RegisteredUserControllerTest extends TestCase
             'name' => 'ユーザー登録テスト',
             'email' => 'test@example.com',
             'password' => 'password',
+            'password_confirmation' => 'password',
         ]);
 
         $response->assertStatus(204);
