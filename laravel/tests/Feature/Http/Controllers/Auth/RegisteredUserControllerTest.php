@@ -3,20 +3,21 @@
 namespace Tests\Feature\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RegisteredUserControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test */
+    public function ユーザーを登録できること(): void
+    {
+        $response = $this->postJson('/api/register', [
+            'name' => 'ユーザー登録テスト',
+            'email' => 'test@example.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertStatus(204);
     }
 }
