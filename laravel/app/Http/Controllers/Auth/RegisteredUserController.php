@@ -19,10 +19,12 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisteredUserStoreRequest $request): Response
     {
+        /** @var string $password */
+        $password = $request->input('password');
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($password),
         ]);
 
         event(new Registered($user));

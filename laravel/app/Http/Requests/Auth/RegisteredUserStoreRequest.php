@@ -35,9 +35,9 @@ class RegisteredUserStoreRequest extends FormRequest
     /**
      * バリデーションエラーのカスタム属性の取得
      *
-     * @return array
+     * @return array<string, string>
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name' => '名前',
