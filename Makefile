@@ -5,11 +5,13 @@ app:
 stop:
 	docker-compose stop
 
-php-check-all: php-ide-helper php-pint php-stan php-test
+php-check-all: php-ide-helper php-pint php-rector php-stan php-test
 php-ide-helper:
 	docker-compose exec --user=app app php artisan ide-helper:models --write --reset
 php-pint:
 	docker-compose exec --user=app app ./vendor/bin/pint -v
+php-rector:
+	docker-compose exec --user=app app ./vendor/bin/rector process
 php-stan:
 	docker-compose exec --user=app app ./vendor/bin/phpstan analyse
 php-test:
