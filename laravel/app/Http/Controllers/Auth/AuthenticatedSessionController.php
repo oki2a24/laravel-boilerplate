@@ -12,7 +12,6 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * ログイン処理を行う。
-     * @param LoginRequest $request
      */
     public function store(LoginRequest $request): Response
     {
