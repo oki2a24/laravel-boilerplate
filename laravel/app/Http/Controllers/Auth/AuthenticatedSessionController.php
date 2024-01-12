@@ -19,4 +19,19 @@ class AuthenticatedSessionController extends Controller
 
         return response()->noContent();
     }
+
+    /**
+     * ログアウトします。
+     */
+    public function destroy(Request $request): Response
+    {
+        Auth::logout();
+
+        if ($request->hasSession()) {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
+
+        return response()->noContent();
+    }
 }
