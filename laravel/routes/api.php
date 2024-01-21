@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HealthController;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ Route::get('/health', [HealthController::class, 'health'])->name('health');
 
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest')->name('register');
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest')->name('login');
+Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
