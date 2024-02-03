@@ -13,7 +13,6 @@ class LoginRequest extends FormRequest
 {
     /**
      * ユーザーがこのリクエストを行う権限があるかどうかを判断します。
-     *
      */
     public function authorize(): bool
     {
