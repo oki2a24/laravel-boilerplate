@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Auth;
+namespace Tests\Feature\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AuthenticatedSessionControllerTest extends TestCase
+class StoreTest extends TestCase
 {
     use RefreshDatabase;
 

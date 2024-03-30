@@ -3,31 +3,33 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Handle an incoming authentication request.
-     *
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * ログイン処理を行う。
      */
-    public function store(Request $request): Response
+    public function store(LoginRequest $request): Response
     {
-        // TODO リクエストフォームクラスに分離する
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+        $request->authenticate();
 
-        if (! Auth::attempt($request->only('email', 'password'))) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        return response()->noContent();
+    }
+
+    /**
+     * ログアウトします。
+     */
+    public function destroy(Request $request): Response
+    {
+        Auth::logout();
+
+        if ($request->hasSession()) {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
         }
 
         return response()->noContent();
