@@ -11,6 +11,62 @@ Laravel 9 を REATful API リソースサーバーとしたアプリの雛形で
     - Laravel 内に統合された Vite
     - Vue.js
 
+## セットアップ手順
+
+1. **環境変数の設定**
+
+   プロジェクトルートに、Docker Compose用の`.env`ファイルを作成します。
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   次に、Laravelアプリケーション用の`.env`ファイルを作成します。
+
+   ```bash
+   cp laravel/.env.example laravel/.env
+   ```
+
+2. **コンテナの起動**
+
+   ```bash
+   make up
+   ```
+
+3. **依存関係のインストール**
+
+   ```bash
+   docker compose exec --user=app app composer install
+   docker compose exec --user=app app npm install
+   ```
+
+4. **アプリケーションの初期設定**
+
+   アプリケーションキーを生成します。
+
+   ```bash
+   docker compose exec --user=app app php artisan key:generate
+   ```
+
+   データベースのテーブルを作成します。
+
+   ```bash
+   docker compose exec --user=app app php artisan migrate
+   ```
+
+5. **開発サーバーの起動**
+
+   Viteの開発サーバーを起動します。
+
+   ```bash
+   make npm-dev
+   ```
+
+6. **アプリケーションへのアクセス**
+
+   ブラウザで `http://localhost` または `http://localhost/login` を開きます。
+
+
 ## TODO
 - [x] Docker Compose 環境を構築する
     - [ ] apache2 起動時のワーニングを解消する

@@ -1,4 +1,5 @@
 {
+    "name": "laravel-boilerplate-frontend",
     "private": true,
     "scripts": {
         "dev": "vite",
