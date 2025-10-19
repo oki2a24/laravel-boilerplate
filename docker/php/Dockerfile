@@ -14,10 +14,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Node.js
-RUN curl -o nodejs.deb https://deb.nodesource.com/node_18.x/pool/main/n/nodejs/nodejs_18.7.0-deb-1nodesource1_amd64.deb \
-  && apt-get update && apt-get install -y --no-install-recommends ./nodejs.deb \
-  && rm ./nodejs.deb \
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y curl \
+    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
