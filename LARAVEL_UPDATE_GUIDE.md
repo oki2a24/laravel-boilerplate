@@ -39,8 +39,8 @@
         *   *（参考）バージョン9→10のアップグレードでは、`App\Http\Kernel.php`のプロパティ名変更などが必要でした。*
 
 4.  **検証:**
-    *   `docker compose exec --user=app app php artisan test` を実行し、すべてのテストがパスすることを確認する。
-    *   ローカル環境でアプリケーションを起動し、主要な機能が手動テストでも正常に動作することを確認する。
+    1.  `make php-check-all` を実行し、静的解析やテストがすべて成功することを確認する。失敗した場合は、エラーメッセージに従って修正する。
+    2.  ローカル環境でアプリケーションを起動し、主要な機能が手動テストでも正常に動作することを確認する。
 
 ---
 
@@ -50,5 +50,10 @@
     *   **事象:** Rectorの実行時に `Process ... not found` のようなエラーが発生する。
     *   **原因:** Rector本体、または `driftingly/rector-laravel` のバージョンが古い可能性がある。
     *   **解決策:** `composer.json` を編集して、`driftingly/rector-laravel` のバージョンを最新のメジャーバージョン（例: `^1.0`）に更新し、`rector/rector` のバージョン指定を削除してから `composer update` を実行する。
+
+*   **php-stanの実行エラー:**
+    *   **事象:** php-stanの実行時に `PHPStan process crashed because it reached configured PHP memory limit` のようなエラーが発生する。
+    *   **原因:** php-stanに割り当てられたメモリが不足している。
+    *   **解決策:** `php-stan` コマンドに `--memory-limit` オプションを追加してメモリ制限を増やす。（例: `./vendor/bin/phpstan analyse --memory-limit=512M`）
 
 ---
