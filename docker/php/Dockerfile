@@ -1,5 +1,5 @@
 FROM composer:2.8.12 AS composer
-FROM php:8.3.27-apache AS shared
+FROM php:8.4.14-apache AS shared
 
 # user, group
 ARG USERNAME=app
