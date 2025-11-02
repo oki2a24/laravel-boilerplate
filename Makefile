@@ -13,7 +13,7 @@ php-pint:
 php-rector:
 	docker compose exec --user=app app ./vendor/bin/rector process
 php-stan:
-	docker compose exec --user=app app ./vendor/bin/phpstan analyse
+	docker compose exec --user=app app ./vendor/bin/phpstan analyse --memory-limit=512M
 php-test:
 	docker compose exec --user=app app php artisan test
 
