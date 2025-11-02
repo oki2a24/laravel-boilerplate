@@ -1,5 +1,5 @@
-FROM composer:2.4.4 AS composer
-FROM php:8.2.0-apache AS shared
+FROM composer:2.8.12 AS composer
+FROM php:8.4.14-apache AS shared
 
 # user, group
 ARG USERNAME=app
@@ -15,17 +15,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Node.js
 RUN apt-get update && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
+    && curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs=20.* \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  libicu-dev=67.* \
+  libicu-dev=76.* \
   libjpeg-dev=1:2.* \
   libpng-dev=1.* \
-  libpq-dev=13.* \
+  libpq-dev=17.* \
   libzip-dev=1.* \
   unzip=6.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
