@@ -29,7 +29,7 @@
         *   **例:**
             *   `composer:2.4.4` → `composer:2.8.12`
             *   `postgres:14.5` → `postgres:16.3`
-            *   `php:8.2.0-apache` → `php:8.3-apache`
+            *   `php:8.2.0-apache` → `php:8.3.27-apache`
 
     *   **方針2: `apt` パッケージ**
         *   **ルール:** `docker/php/Dockerfile`内で`apt-get install`を使ってインストールされるライブラリは、すべて**メジャーバージョンで固定 (`X.*`)** する。
