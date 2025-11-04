@@ -80,7 +80,7 @@ const computedImages = computed(() =>
     index,
     value,
     classObject: { "thumb-media-active": index === swiperRealIndex.value },
-  }))
+  })),
 );
 
 /*
@@ -287,10 +287,17 @@ main {
   overflow: visible;
 }
 .gallery02 .swiper-fade .swiper-slide {
-  -webkit-transition-property: opacity, -webkit-transform !important;
-  transition-property: opacity, -webkit-transform !important;
+  -webkit-transition-property:
+    opacity,
+    -webkit-transform !important;
+  transition-property:
+    opacity,
+    -webkit-transform !important;
   transition-property: opacity, transform !important;
-  transition-property: opacity, transform, -webkit-transform !important;
+  transition-property:
+    opacity,
+    transform,
+    -webkit-transform !important;
   pointer-events: none;
 }
 .gallery02 .swiper-fade .swiper-slide-active {
