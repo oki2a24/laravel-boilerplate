@@ -1,5 +1,5 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/larastan/larastan/extension.neon
 
 parameters:
 
@@ -8,6 +8,10 @@ parameters:
 
     # Level 9 is the highest level
     level: 9
+
+    ignoreErrors:
+        - '#PHPDoc tag @use has invalid value#'
+        - '#Class App\\Models\\User uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'
 
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'
