@@ -56,4 +56,15 @@
     *   **原因:** php-stanに割り当てられたメモリが不足している。
     *   **解決策:** `php-stan` コマンドに `--memory-limit` オプションを追加してメモリ制限を増やす。（例: `./vendor/bin/phpstan analyse --memory-limit=512M`）
 
+*   **php-stanとpintの競合エラー:**
+    *   **事象:** `make php-check-all` を実行すると、`pint`による自動フォーマットが`phpstan`の解析を妨げ、エラーがループする。具体的には、`ide-helper`が生成するPHPDocの`@use`タグが`pint`によって整形され、それを`phpstan`がエラーとして検出する。
+    *   **原因:** `pint`のフォーマットルールと`phpstan`が期待するPHPDocの形式が競合している。
+    *   **暫定対応:** `phpstan.neon`に`ignoreErrors`を追加し、該当のエラーを無視する。
+        ```neon
+        ignoreErrors:
+            - '#PHPDoc tag @use has invalid value#'
+            - '#Class App\\Models\\User uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'
+        ```
+    *   **恒久対応（課題）:** `pint`の設定をカスタマイズするか、`phpstan`が解釈できる別の方法で`HasFactory`のジェネリクス型を定義する必要がある。
+
 ---
