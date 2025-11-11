@@ -7,7 +7,7 @@ stop:
 
 php-check-all: php-ide-helper php-pint php-rector php-stan php-test
 php-ide-helper:
-	docker compose exec --user=app app php artisan ide-helper:models --write --reset --write-eloquent-helper --no-interaction
+	docker compose exec --user=app app php artisan ide-helper:models --nowrite --write-eloquent-helper --no-interaction
 php-pint:
 	docker compose exec --user=app app ./vendor/bin/pint -v
 php-rector:

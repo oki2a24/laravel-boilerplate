@@ -38,9 +38,21 @@
         *   **各バージョンアップには固有の変更点があるため、必ず公式ガイドの「Upgrading」セクション全体を確認すること。**
         *   *（参考）バージョン9→10のアップグレードでは、`App\Http\Kernel.php`のプロパティ名変更などが必要でした。*
 
-4.  **検証:**
-    1.  `make php-check-all` を実行し、静的解析やテストがすべて成功することを確認する。失敗した場合は、エラーメッセージに従って修正する。
-    2.  ローカル環境でアプリケーションを起動し、主要な機能が手動テストでも正常に動作することを確認する。
+4.  **検証と静的解析環境の調整:**
+    1.  `make php-check-all` を実行し、静적解析やテストがすべて成功することを確認する。
+
+    2.  **静的解析エラーが発生した場合:**
+        *   エラーメッセージを注意深く読み、どのツール（`phpstan`, `pint`, `rector`など）が原因か、どのファイルで発生しているかを特定する。
+        *   **原因の切り分け:**
+            *   **Laravel本体の変更に起因するか？** → 公式アップグレードガイドに対応方法が記載されていないか確認する。
+            *   **周辺ツール間の競合に起因するか？** （例: `ide-helper`の生成コードと`phpstan`の解析ルールの衝突など）
+        *   **解決策の検討:**
+            1.  **ツールの設定変更を検討する:** 各ツールの責任範囲を明確にし、設定ファイル（`phpstan.neon`, `pint.json`, `rector.php`など）で不要なルールを無効化したり、必要な設定を追加したりする。**静的解析の堅牢性を損なわない範囲での調整を優先する。**
+            2.  **コード側の修正を検討する:** ツールの要求に合わせて、PHPDocアノテーションの追加や修正を行う。
+            3.  **最終手段としてエラーを無視する:** `phpstan.neon`の`ignoreErrors`などでエラーを無視するのは、問題がツール側のバグであるなど、明確な理由がある場合に限定する。
+        *   **修正と再検証:** 変更を加えた後、再度 `make php-check-all` を実行し、エラーが解消されるまでこのプロセスを繰り返す。
+
+    3.  ローカル環境でアプリケーションを起動し、主要な機能が手動テストでも正常に動作することを確認する。
 
 ---
 
@@ -55,16 +67,5 @@
     *   **事象:** php-stanの実行時に `PHPStan process crashed because it reached configured PHP memory limit` のようなエラーが発生する。
     *   **原因:** php-stanに割り当てられたメモリが不足している。
     *   **解決策:** `php-stan` コマンドに `--memory-limit` オプションを追加してメモリ制限を増やす。（例: `./vendor/bin/phpstan analyse --memory-limit=512M`）
-
-*   **php-stanとpintの競合エラー:**
-    *   **事象:** `make php-check-all` を実行すると、`pint`による自動フォーマットが`phpstan`の解析を妨げ、エラーがループする。具体的には、`ide-helper`が生成するPHPDocの`@use`タグが`pint`によって整形され、それを`phpstan`がエラーとして検出する。
-    *   **原因:** `pint`のフォーマットルールと`phpstan`が期待するPHPDocの形式が競合している。
-    *   **暫定対応:** `phpstan.neon`に`ignoreErrors`を追加し、該当のエラーを無視する。
-        ```neon
-        ignoreErrors:
-            - '#PHPDoc tag @use has invalid value#'
-            - '#Class App\\Models\\User uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'
-        ```
-    *   **恒久対応（課題）:** `pint`の設定をカスタマイズするか、`phpstan`が解釈できる別の方法で`HasFactory`のジェネリクス型を定義する必要がある。
 
 ---
