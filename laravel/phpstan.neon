@@ -10,10 +10,6 @@ parameters:
     level: 9
 
 #    ignoreErrors:
-#        - '#PHPDoc tag @use has invalid value#'
-#        - '#Class .* uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types: TFactory#'
-
-#    ignoreErrors:
 #        - '#PHPDoc tag @var#'
 #
 #    excludePaths:
