@@ -1,0 +1,15 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "phpdoc_to_comment": false,
+        "phpdoc_order": false,
+        "phpdoc_separation": false,
+        "phpdoc_align": false,
+        "phpdoc_indent": false,
+        "phpdoc_line_span": false,
+        "phpdoc_summary": false,
+        "phpdoc_tag_casing": false,
+        "phpdoc_types": false,
+        "no_superfluous_phpdoc_tags": false
+    }
+}
