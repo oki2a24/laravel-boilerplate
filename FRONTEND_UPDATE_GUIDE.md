@@ -39,11 +39,10 @@
 5.  **コードと設定の修正:**
     *   メジャーバージョンアップを行った場合、破壊的変更が含まれている可能性がある。
     *   各パッケージの公式サイトやGitHubリポジトリで**リリースノート**や**マイグレーションガイド**を確認し、`vite.config.js`、`.eslintrc.js`、またはVueコンポーネントなどのコードに必要な修正を施す。
-    *   **ESLint v9への移行に関する注意点:**
-        *   ESLint v9では、デフォルトのコンフィグ形式が `.eslintrc` から `eslint.config.js` (Flat Config) に変更されました。
-        *   現在のプロジェクトで `.eslintrc.js` を使用している場合、ESLint v9で正しく動作しない可能性があります。
-        *   一時的に `.eslintrc.js` を使い続ける場合は、`ESLINT_USE_FLAT_CONFIG=false` 環境変数を設定する必要があります。
-        *   長期的な視点では、Flat Configへの移行が推奨されます。
+    *   **ESLint v9 (Flat Config) に関する注意点:**
+        *   このプロジェクトは、ESLint v9で標準となった `eslint.config.js` (Flat Config) 形式を既に使用しています。
+        *   そのため、`lint` コマンド実行時に `ESLINT_USE_FLAT_CONFIG=false` を設定する必要は**ありません**。
+        *   古い `.eslintrc.js` 形式のプロジェクトで作業する際は、この環境変数の有無に注意してください。
     *   **Prettier v3への移行に関する注意点:**
         *   Prettier v3では `trailingComma` オプションのデフォルト値が `"all"` に変更されました。
         *   もし、この変更によってフォーマットが意図しないものになる場合は、`laravel/.prettierrc` に `"trailingComma": "es5"` または `"trailingComma": "none"` を明示的に設定してください。
@@ -53,7 +52,7 @@
 ### **3. 検証**
 
 1.  **静的解析:**
-    *   `docker compose exec -e ESLINT_USE_FLAT_CONFIG=false --user=app app npm run lint` を実行し、リンターのエラーがないことを確認する。
+    *   `docker compose exec --user=app app npm run lint` を実行し、リンターのエラーがないことを確認する。
     *   `docker compose exec --user=app app npm run format` を実行し、フォーマッターのエラーがないことを確認する。
 
 2.  **手動テスト:**
