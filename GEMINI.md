@@ -80,3 +80,9 @@
 *   `make npm-dev`: ホットリロード機能付きの Vite 開発サーバーを起動します。
 *   `make npm-lint`: ESLint を使って JavaScript と Vue のファイルをリントします。
 *   `make npm-format`: Prettier を使ってコードをフォーマットします。
+## Gemini Added Memories
+
+*   このプロジェクトはLaravel 11のSlim Skeleton構造にアップグレード済みである。アップグレードの詳細は `docs/LARAVEL11_UPGRADE_GUIDE.md` を参照すること。
+*   このプロジェクトでは、Laravel 11のクリーンインストールにはない `config/cors.php`, `config/sanctum.php`, `config/ide-helper.php`, `routes/api.php` を、プロジェクトの要件に基づき意図的に維持している。
+*   `laravel-11-fresh` ディレクトリは、`docs/LARAVEL11_UPGRADE_GUIDE.md` に記載されたTODO項目（クリーンインストールにはないが維持されているファイルの精査）が完了するまで保持すること。精査が完了次第、削除すること。
+*   Laravel 11へのアップグレード時には、以下のトラブルシューティング経験が役立つ: `config/app.php`の最新化、`bootstrap/app.php`および`bootstrap/providers.php`でのプロバイダ・ミドルウェア・ルーティングの適切な登録、全Laravelキャッシュのクリア、`RateLimiter`の正しい定義、`EventServiceProvider`によるイベント自動検出の制御、古いサービスプロバイダ定数への依存解消。
