@@ -5,13 +5,14 @@ namespace Tests\Feature\Http\Controllers\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class RegisteredUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function ユーザーを登録できること(): void
     {
         Event::fake();

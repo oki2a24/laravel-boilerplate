@@ -4,13 +4,14 @@ namespace Tests\Feature\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function 正しい情報で認証できること(): void
     {
         $user = User::factory()->create([
@@ -26,7 +27,7 @@ class StoreTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    /** @test */
+    #[Test]
     public function 不正な情報では認証できないこと(): void
     {
         $user = User::factory()->create([

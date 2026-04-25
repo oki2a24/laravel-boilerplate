@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function パスワードリセットリクエストを送信すること(): void
     {
         Notification::fake();
@@ -25,7 +26,7 @@ class StoreTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
-    /** @test */
+    #[Test]
     public function メールアドレスが存在しない場合はエラーを返すこと(): void
     {
         $response = $this->postJson('/api/forgot-password', ['email' => 'test@example.com']);

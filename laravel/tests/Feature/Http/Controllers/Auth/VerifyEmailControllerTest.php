@@ -7,13 +7,14 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class VerifyEmailControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function メールアドレスが検証済みとしてマークされること(): void
     {
         $user = User::factory()->unverified()->create();
@@ -39,7 +40,7 @@ class VerifyEmailControllerTest extends TestCase
         $response->assertNoContent();
     }
 
-    /** @test */
+    #[Test]
     public function メールアドレスがすでに検証済みの場合は204を返すこと(): void
     {
         $user = User::factory()->create();
@@ -59,7 +60,7 @@ class VerifyEmailControllerTest extends TestCase
         $response->assertNoContent();
     }
 
-    /** @test */
+    #[Test]
     public function idが一致しない場合は検証済みとしてマークされないこと(): void
     {
         $user = User::factory()->create();
@@ -79,7 +80,7 @@ class VerifyEmailControllerTest extends TestCase
         $response->assertForbidden();
     }
 
-    /** @test */
+    #[Test]
     public function メールアドレスが一致しない、つまりハッシュが一致しない、場合は検証済みとしてマークされないこと(): void
     {
         $user = User::factory()->create();

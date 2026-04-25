@@ -5,11 +5,12 @@ namespace Tests\Feature\Http\Controllers\Auth\EmailVerificationNotificationContr
 use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function メール確認のメールを送信すること(): void
     {
         Notification::fake();
@@ -30,8 +31,8 @@ class StoreTest extends TestCase
         );
     }
 
-    /** @test */
-    public function メール確認済みの場合はメールを送信しないこと()
+    #[Test]
+    public function メール確認済みの場合はメールを送信しないこと(): void
     {
         Notification::fake();
 

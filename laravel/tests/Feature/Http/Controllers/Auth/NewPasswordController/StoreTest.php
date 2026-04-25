@@ -8,13 +8,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StoreTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function パスワードがリセットできること(): void
     {
         Event::fake();
@@ -42,7 +43,7 @@ class StoreTest extends TestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function 不正なトークンによりエラーとなること(): void
     {
         Event::fake();

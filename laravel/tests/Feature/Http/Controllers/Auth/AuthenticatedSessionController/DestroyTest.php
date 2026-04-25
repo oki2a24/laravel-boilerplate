@@ -4,13 +4,14 @@ namespace Tests\Feature\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class DestroyTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function ログアウトに成功すること(): void
     {
         $user = User::factory()->create();
