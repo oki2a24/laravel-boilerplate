@@ -86,3 +86,4 @@
 *   このプロジェクトでは、Laravel 11のクリーンインストールにはない `config/cors.php`, `config/sanctum.php`, `config/ide-helper.php`, `routes/api.php` を、プロジェクトの要件に基づき意図的に維持している。
 *   `laravel-11-fresh` ディレクトリは、`docs/LARAVEL11_UPGRADE_GUIDE.md` に記載されたTODO項目（クリーンインストールにはないが維持されているファイルの精査）が完了するまで保持すること。精査が完了次第、削除すること。
 *   Laravel 11へのアップグレード時には、以下のトラブルシューティング経験が役立つ: `config/app.php`の最新化、`bootstrap/app.php`および`bootstrap/providers.php`でのプロバイダ・ミドルウェア・ルーティングの適切な登録、全Laravelキャッシュのクリア、`RateLimiter`の正しい定義、`EventServiceProvider`によるイベント自動検出の制御、古いサービスプロバイダ定数への依存解消。
+*   本プロジェクトでは `generalist` サブエージェントの使用を禁止する。全ての作業はメインエージェントが直接実行し、各ステップでの `git status` 確認と小まめなコミットを通じて、変更の透明性と制御を完全に維持すること。
