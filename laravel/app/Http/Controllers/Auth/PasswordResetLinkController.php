@@ -13,7 +13,7 @@ class PasswordResetLinkController extends Controller
     /**
      * パスワードリセットリクエストを処理します。
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): JsonResponse
     {

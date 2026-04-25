@@ -1,0 +1,14 @@
+# TASK: PHPUnit 10+ Test Attributes Migration
+- Branch: feat-refactor-test-attributes
+- Created: 2026-04-25
+- [x] Research & Analysis
+- [x] Design Document Creation
+- [/] Implementation Plan Creation
+- [ ] Refactor RegisteredUserControllerTest.php
+- [ ] Refactor VerifyEmailControllerTest.php
+- [ ] Refactor AuthenticatedSessionController/DestroyTest.php
+- [ ] Refactor AuthenticatedSessionController/StoreTest.php
+- [ ] Refactor EmailVerificationNotificationController/StoreTest.php
+- [ ] Refactor NewPasswordController/StoreTest.php
+- [ ] Refactor PasswordResetLinkController/StoreTest.php
+- [ ] Final Verification & Reporting

@@ -17,7 +17,7 @@ class NewPasswordController extends Controller
     /**
      * パスワード再設定用のリクエストを受け付けます。
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): JsonResponse
     {
