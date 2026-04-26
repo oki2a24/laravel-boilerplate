@@ -1,5 +1,5 @@
-# laravel9-boilerplate
-Laravel 9 を REATful API リソースサーバーとしたアプリの雛形です。
+# laravel12-boilerplate
+Laravel 12 を RESTful API リソースサーバーとしたアプリの雛形です。
 
 ## 構成
 - ミドルウェア

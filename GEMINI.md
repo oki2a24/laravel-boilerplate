@@ -4,16 +4,24 @@
 
 このプロジェクトは、RESTful API のバックエンドとシングルページアプリケーション（SPA）のフロントエンドを持つ Web アプリケーションのひな形（ボイラープレート）です。
 
-*   **バックエンド:** JSON API リソースサーバーとして機能する Laravel 9 アプリケーション。
+*   **バックエンド:** JSON API リソースサーバーとして機能する Laravel 12 アプリケーション。
     *   データベース: PostgreSQL
-    *   主要ライブラリ: `laravel/sanctum` を用いた認証。
+    *   主要ライブラリ: `laravel/sanctum` を用いた認証、`laravel/boost` による AI 開発支援。
     *   コード品質: 静的解析とフォーマットツールが重点的に設定されており、`larastan/larastan` (PHPStan), `rector/rector`, `laravel/pint`, `barryvdh/laravel-ide-helper` が含まれています。
 *   **フロントエンド:** Vue.js 3 アプリケーション。
     *   ビルドツール: 高速な開発とバンドルを実現する Vite が Laravel プロジェクトに統合されています。
     *   UI: Bootstrap 5
     *   ルーティング: `vue-router`
-    *   コード品質: コードのリンティングとフォーマットのために `ESLint` と `Prettier` がセットアップされています。
+    *   コード品質: コードのリンティングとフォーマットのために `ESLint` 和 `Prettier` がセットアップされています。
 *   **開発環境:** 環境全体が Docker を用いてコンテナ化されており、Docker Compose で管理されています。一般的なコマンドのショートカットとして `Makefile` が提供されています。
+
+## AI エージェントへの重要指示 (AI Guidelines)
+
+本プロジェクトでは **Laravel Boost** を導入しています。AI エージェント（私を含む）は、以下の規律を遵守しなければなりません。
+
+1.  **詳細規律の参照**: 具体的なコーディング規約や Laravel 12 固有の作法については、`laravel/GEMINI.md` および `laravel/.agents/` 配下のガイドラインを最優先で参照すること。
+2.  **スキルの活用**: `laravel-best-practices` スキルを常に念頭に置き、Laravel の慣習に沿った実装を行うこと。
+3.  **ツールの使用**: 可能であれば `make php-boost-mcp` 等を通じて Boost の MCP ツールを活用し、正確なプロジェクト情報を取得すること。
 
 ## プロジェクトのビルドと実行
 
@@ -72,6 +80,10 @@
 *   `make php-rector`: Rector を実行してコードの自動リファクタリングを行います。
 *   `make php-stan`: Larastan (PHPStan) を実行して静的解析を行います。
 *   `make php-test`: PHPUnit テストスイートを実行します。
+*   **Laravel Boost 連携**:
+    *   `make php-boost-update`: AI ガイドラインとスキルを最新状態に更新します（パッケージ更新時に自動実行されます）。
+    *   `make php-boost-add-skill skill=...`: 指定したスキルを追加します。
+    *   `make php-boost-mcp`: AI コンテキストサーバー (MCP) を起動します。
 
 ### フロントエンド (Vue.js/Vite)
 
@@ -82,8 +94,8 @@
 *   `make npm-format`: Prettier を使ってコードをフォーマットします。
 ## Gemini Added Memories
 
-*   このプロジェクトはLaravel 11のSlim Skeleton構造にアップグレード済みである。アップグレードの詳細は `docs/LARAVEL11_UPGRADE_GUIDE.md` を参照すること。
-*   このプロジェクトでは、Laravel 11のクリーンインストールにはない `config/cors.php`, `config/sanctum.php`, `config/ide-helper.php`, `routes/api.php` を、プロジェクトの要件に基づき意図的に維持している。
-*   `laravel-11-fresh` ディレクトリは、`docs/LARAVEL11_UPGRADE_GUIDE.md` に記載されたTODO項目（クリーンインストールにはないが維持されているファイルの精査）が完了するまで保持すること。精査が完了次第、削除すること。
-*   Laravel 11へのアップグレード時には、以下のトラブルシューティング経験が役立つ: `config/app.php`の最新化、`bootstrap/app.php`および`bootstrap/providers.php`でのプロバイダ・ミドルウェア・ルーティングの適切な登録、全Laravelキャッシュのクリア、`RateLimiter`の正しい定義、`EventServiceProvider`によるイベント自動検出の制御、古いサービスプロバイダ定数への依存解消。
+*   このプロジェクトは Laravel 12 にアップグレード済みである。過去の Laravel 11 へのアップグレード経緯は `docs/LARAVEL11_UPGRADE_GUIDE.md` を参照すること。
+*   Laravel 12 の新構造（`bootstrap/app.php` でのルーティング・ミドルウェア管理等）に準拠している。
+*   AI 開発支援ツールとして **Laravel Boost** が導入されており、`laravel/boost.json` および `laravel/.agents/` でガイドラインが管理されている。
+*   `composer update` 実行時に `php artisan boost:update` が自動実行され、AI ガイドラインが最新化される。
 *   本プロジェクトでは `generalist` サブエージェントの使用を禁止する。全ての作業はメインエージェントが直接実行し、各ステップでの `git status` 確認と小まめなコミットを通じて、変更の透明性と制御を完全に維持すること。
