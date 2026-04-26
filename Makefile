@@ -31,3 +31,8 @@ php-boost-add-skill: ## Add/Update a boost skill (usage: make php-boost-add-skil
 	docker compose exec --user=app app php artisan boost:add-skill $(skill)
 php-boost-mcp: ## Run boost:mcp (AI context server)
 	docker compose exec --user=app app php artisan boost:mcp
+
+boost-setup-links: ## Setup symbolic links for Boost (Run this on host)
+	ln -snf laravel/.agents .agents
+	ln -snf laravel/boost.json boost.json
+	ln -snf laravel/GEMINI.md BOOST.md
