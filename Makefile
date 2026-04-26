@@ -24,3 +24,10 @@ npm-lint:
 	docker compose exec --user=app app npm run lint
 npm-format:
 	docker compose exec --user=app app npm run format
+
+php-boost-update: ## Update Laravel Boost resources (Guidelines/Skills)
+	docker compose exec --user=app app php artisan boost:update
+php-boost-add-skill: ## Add/Update a boost skill (usage: make php-boost-add-skill skill=...)
+	docker compose exec --user=app app php artisan boost:add-skill $(skill)
+php-boost-mcp: ## Run boost:mcp (AI context server)
+	docker compose exec --user=app app php artisan boost:mcp
