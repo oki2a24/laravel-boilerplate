@@ -62,7 +62,7 @@ return [
     */
 
     'middleware' => [
-        'verify_csrf_token' => ValidateCsrfToken::class,
+        'verify_csrf_token' => \Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class,
         'encrypt_cookies' => EncryptCookies::class,
     ],
 
