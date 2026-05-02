@@ -1,99 +1,64 @@
-# laravel12-boilerplate
-Laravel 12 を RESTful API リソースサーバーとしたアプリの雛形です。
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-## 構成
-- ミドルウェア
-    - Docker, Docker Compose
-- バックエンド
-    - Laravel の API
-    - PostgreSQL
-- フロントエンド
-    - Laravel 内に統合された Vite
-    - Vue.js
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## セットアップ手順
+## About Laravel
 
-1. **環境変数の設定**
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-   プロジェクトルートに、Docker Compose用の`.env`ファイルを作成します。
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-   ```bash
-   cp .env.example .env
-   ```
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-   次に、Laravelアプリケーション用の`.env`ファイルを作成します。
+## Learning Laravel
 
-   ```bash
-   cp laravel/.env.example laravel/.env
-   ```
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-2. **コンテナの起動**
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-   ```bash
-   make up
-   ```
+## Laravel Sponsors
 
-3. **依存関係のインストール**
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-   ```bash
-   docker compose exec --user=app app composer install
-   docker compose exec --user=app app npm install
-   ```
+### Premium Partners
 
-4. **アプリケーションの初期設定**
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
-   アプリケーションキーを生成します。
+## Contributing
 
-   ```bash
-   docker compose exec --user=app app php artisan key:generate
-   ```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-   データベースのテーブルを作成します。
+## Code of Conduct
 
-   ```bash
-   docker compose exec --user=app app php artisan migrate
-   ```
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-5. **開発サーバーの起動**
+## Security Vulnerabilities
 
-   Viteの開発サーバーを起動します。
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-   ```bash
-   make npm-dev
-   ```
+## License
 
-6. **アプリケーションへのアクセス**
-
-   ブラウザで `http://localhost` または `http://localhost/login` を開きます。
-
-
-## TODO
-- [x] Docker Compose 環境を構築する
-    - [ ] apache2 起動時のワーニングを解消する
-- [x] Laravel をインストールする
-- [x] Laravel で Vite を使えるようにする
-- [x] ESLint Prettier
-    - 参考: 
-        - https://github.com/vitejs/awesome-vite#vue-3
-        - https://github.com/oki2a24/laravel8-boilerplate/tree/main/laravel
-- [x] PHP CS Fixer
-- [x] Vue Router
-- [x] VS Code Dev Container
-- [x] laravel/pint へ移行
-- [x] Larastan
-- [x] Supervisor の設定を見直す
-- [x] ~~root でないユーザーで Supervisor を動かす~~ → crond は root で動かすことが前提と考えるとこれは不要かもしれない
-- [x] app 用の cron
-- [x] Health エンドポイント
-- [x] Makefile を導入する
-- [x] https://github.com/barryvdh/laravel-ide-helper を導入する
-- [x] Bootstrap5 を導入する
-- [ ] Xdebug ステップデバッギングを可能にする
-- [ ] VS Code 連携を強化する
-  - [ ] Dev Container 設定ファイルのフォーマット変更へ対応する
-  - [ ] Prettier と連携する
-  - [ ] ESLint と連携する
-- [ ] Laravel 10 へアップグレードする
-- [ ] MSW を導入する https://mswjs.io/docs/getting-started/install
-- [ ] Storybook を導入する
-- [ ] メニューとして https://getbootstrap.jp/docs/5.0/getting-started/introduction/ 等の上と左メニューを再現する
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
