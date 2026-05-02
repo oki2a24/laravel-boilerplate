@@ -28,7 +28,7 @@
 以下の手順は、プロジェクトの `README.md` と `Makefile` に基づいています。
 
 1.  **初期セットアップ:**
-    *   Docker 環境ファイルを作成します: `cp .env.example .env.docker`
+    *   Docker 環境ファイルを作成します: `cp .env.docker.example .env.docker`
     *   Laravel アプリケーションの環境ファイルを作成します: `cp .env.example .env`
 
 2.  **コンテナの起動:**
