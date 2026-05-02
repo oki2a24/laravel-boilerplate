@@ -2,6 +2,8 @@ services:
   app:
     build:
       context: ./docker/php
+    env_file:
+      - .env.docker
     environment:
       - APP_AXIOS_BASEURL=${APP_AXIOS_BASEURL}
       - DB_URL=pgsql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_DATABASE}?charset=utf8&prefix_indexes=true&schema=public&sslmode=prefer
@@ -15,7 +17,7 @@ services:
       - "80:80"
       - "443:443"
       - "5173:5173"
-    working_dir: /var/www/html/laravel
+    working_dir: /var/www/html
 
   db:
     build:

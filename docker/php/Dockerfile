@@ -47,7 +47,7 @@ RUN chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/www/html \
   && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/run/apache2 \
   && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/lock/apache2 \
   && chown -R --no-dereference ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} /var/log/apache2
-ARG APACHE_DOCUMENT_ROOT=/var/www/html/laravel/public
+ARG APACHE_DOCUMENT_ROOT=/var/www/html/public
 ENV APACHE_DOCUMENT_ROOT ${APACHE_DOCUMENT_ROOT}
 RUN sed -ri -e "s!/var/www/html!\${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf \
   && sed -ri -e "s!/var/www/!\${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
