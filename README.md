@@ -1,93 +1,105 @@
-# laravel12-boilerplate
-Laravel 12 を RESTful API リソースサーバーとしたアプリの雛形です。
+# 🚀 Laravel Modern Boilerplate
 
-## 構成
-- ミドルウェア
-    - Docker, Docker Compose
-- バックエンド
-    - Laravel の API
-    - PostgreSQL
-- フロントエンド
-    - Laravel 内に統合された Vite
-    - Vue.js
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel)](https://laravel.com)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker)](https://www.docker.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-## セットアップ手順
+Laravel 13 を RESTful API サーバーとし、Vue.js 3 + Vite によるモダンな SPA を統合したフルスタック・ボイラープレートです。
+開発効率を最大化するための Docker 環境、静的解析ツール、そして AI (Gemini) との高度な連携機能を備えています。
 
-1. **環境変数の設定**
+---
 
-   プロジェクトルートに、Docker Compose用の環境変数ファイルを作成します。
+## 🏗️ 技術スタック
 
-   ```bash
-   cp .env.docker.example .env.docker
-   ```
+### Backend (Laravel 13 Ecosystem)
+- **Framework:** Laravel 13 (PHP 8.4+)
+- **Auth:** Laravel Sanctum (SPA Authentication)
+- **Analysis:** Larastan (Static Analysis), Laravel Pint (Code Style)
+- **Testing:** PHPUnit 13
+- **Automation:** Rector (Refactoring), Laravel Boost (AI Context Optimization)
 
-   次に、Laravelアプリケーション用の環境変数ファイルを作成します。
+### Frontend (Vue.js 3 Ecosystem)
+- **Framework:** Vue.js 3 (Composition API)
+- **Bundler:** Vite 6
+- **Router:** Vue Router 4
+- **Styling:** Bootstrap 5
+- **Lint/Format:** ESLint 9, Prettier 3
 
-   ```bash
-   cp .env.example .env
-   ```
+### Infrastructure
+- **Container:** Docker / Docker Compose
+- **Web:** Apache 2.4 (SSL Support)
+- **DB:** PostgreSQL
 
+---
 
-2. **コンテナの起動**
+## ⚡ クイックスタート
 
-   ```bash
-   make up
-   ```
+### 1. 環境変数の準備
+プロジェクトルートで以下のコマンドを実行し、環境変数ファイルをコピーします。
 
-3. **依存関係のインストール**
+```bash
+cp .env.docker.example .env.docker
+cp .env.example .env
+```
 
-   ```bash
-   docker compose exec --user=app app composer install
-   docker compose exec --user=app app npm install
-   ```
+### 2. コンテナの起動
+Makefile を使用して環境を立ち上げます。
 
-4. **アプリケーションの初期設定**
+```bash
+make up
+```
 
-   アプリケーションキーを生成します。
+### 3. 初期化処理
+コンテナに入り、依存関係のインストールと初期設定を行います。
 
-   ```bash
-   docker compose exec --user=app app php artisan key:generate
-   ```
+```bash
+make app
+# コンテナ内蔵 bash に入ります
+composer install
+npm install
+php artisan key:generate
+php artisan migrate
+exit
+```
 
-   データベースのテーブルを作成します。
+### 4. 開発サーバーの起動
+Vite のホットリロードを有効にするため、開発サーバーを起動します。
 
-   ```bash
-   docker compose exec --user=app app php artisan migrate
-   ```
+```bash
+make npm-dev
+```
 
-5. **開発サーバーの起動**
+ブラウザで `http://localhost` にアクセスしてください。
 
-   Viteの開発サーバーを起動します。
+---
 
-   ```bash
-   make npm-dev
-   ```
+## 🛠️ 開発コマンド (Makefile)
 
-6. **アプリケーションへのアクセス**
+このプロジェクトでは、頻繁に使用するコマンドを `Makefile` に集約しています。
 
-   ブラウザで `http://localhost` または `http://localhost/login` を開きます。
+| コマンド | 説明 |
+| :--- | :--- |
+| `make up` | Docker コンテナをバックグラウンドで起動 |
+| `make stop` | Docker コンテナを停止 |
+| `make app` | `app` コンテナの bash に接続 |
+| `make php-check-all` | 静的解析、フォーマット、テストを全実行 |
+| `make php-test` | PHPUnit テストの実行 |
+| `make npm-dev` | Vite 開発サーバーの起動 |
+| `make npm-lint-format` | フロントエンドのリントとフォーマット |
 
+---
 
-## TODO
-- [x] Docker Compose 環境を構築する
-    - [ ] apache2 起動時のワーニングを解消する
-- [x] Laravel をインストールする
-- [x] Laravel で Vite を使えるようにする
-- [x] ESLint Prettier
-- [x] PHP CS Fixer
-- [x] Vue Router
-- [x] VS Code Dev Container
-- [x] laravel/pint へ移行
-- [x] Larastan
-- [x] Supervisor の設定を見直す
-- [x] app 用の cron
-- [x] Health エンドポイント
-- [x] Makefile を導入する
-- [x] https://github.com/barryvdh/laravel-ide-helper を導入する
-- [x] Bootstrap5 を導入する
-- [ ] Xdebug ステップデバッギングを可能にする
-- [ ] VS Code 連携を強化する
-- [ ] Laravel 10 へアップグレードする
-- [ ] MSW を導入する
-- [ ] Storybook を導入する
-- [ ] メニューを再現する
+## 🤖 AI (Gemini/Boost) との連携
+
+このプロジェクトは **Laravel Boost** を導入しており、Gemini 等の AI エージェントがコードベースを深く理解できるように最適化されています。
+
+- **AI コンテキストサーバー:** `make php-boost-mcp` で MCP サーバーを起動できます。
+- **ガイドラインの更新:** `make php-boost-update` で最新のコーディング規約を同期します。
+- **指示書:** 詳細な規律は `GEMINI.md` に記載されています。
+
+---
+
+## 📄 ライセンス
+
+このプロジェクトは [MIT License](LICENSE) の下で公開されています。
