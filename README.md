@@ -13,7 +13,7 @@ Laravel 13 を RESTful API サーバーとし、Vue.js 3 + Vite によるモダ�
 ## 🏗️ 技術スタック
 
 ### Backend (Laravel 13 Ecosystem)
-- **Framework:** Laravel 13 (PHP 8.4+)
+- **Framework:** Laravel 13 (PHP 8.3+)
 - **Auth:** Laravel Sanctum (SPA Authentication)
 - **Analysis:** Larastan (Static Analysis), Laravel Pint (Code Style)
 - **Testing:** PHPUnit 13
@@ -21,8 +21,8 @@ Laravel 13 を RESTful API サーバーとし、Vue.js 3 + Vite によるモダ�
 
 ### Frontend (Vue.js 3 Ecosystem)
 - **Framework:** Vue.js 3 (Composition API)
-- **Bundler:** Vite 6
-- **Router:** Vue Router 4
+- **Bundler:** Vite 8
+- **Router:** Vue Router 5
 - **Styling:** Bootstrap 5
 - **Lint/Format:** ESLint 9, Prettier 3
 
