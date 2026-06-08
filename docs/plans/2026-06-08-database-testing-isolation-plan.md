@@ -6,7 +6,7 @@
 
 **アーキテクチャ:** 
 - Docker起動時に `docker-entrypoint-initdb.d/` 内のスクリプトでテスト用DBを自動作成する。
-- 開発時（`APP_ENV=local` / `testing`）のみテストDBを作成し、本番環境（`production`）での作成を防止する。
+- 環境変数 `CREATE_TEST_DB=true` が設定されている場合のみテストDBを作成し、本番環境での不要な作成を防止する（デフォルトは `true`）。
 - `phpunit.xml` でテスト接続先を `laravel_test` に固定し、テスト実行時は `RefreshDatabase` で高速にリセットする。
 
 **技術スタック:** Docker Compose, PostgreSQL 16, PHPUnit 13, Laravel 13
@@ -39,8 +39,8 @@
   #!/bin/bash
   set -e
 
-  # APP_ENV が local または testing の場合のみテストDBを作成する
-  if [ "$APP_ENV" = "local" ] || [ "$APP_ENV" = "testing" ]; then
+  # CREATE_TEST_DB が true の場合のみテストDBを作成する
+  if [ "$CREATE_TEST_DB" = "true" ]; then
       echo "Creating testing database: laravel_test..."
       psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
           CREATE DATABASE laravel_test;
@@ -48,14 +48,14 @@
   EOSQL
       echo "Testing database created successfully."
   else
-      echo "Skipping testing database creation (APP_ENV=$APP_ENV)"
+      echo "Skipping testing database creation (CREATE_TEST_DB=$CREATE_TEST_DB)"
   fi
   ```
 
 - [ ] **ステップ 2: コミット**
   ```bash
   git add docker/postgres/init-db.sh
-  git commit -m "feat: add postgres db initialization script for testing database"
+  git commit -m "feat: テスト用DBを作成する初期化スクリプトを追加"
   ```
 
 ---
@@ -77,7 +77,7 @@
 - [ ] **ステップ 2: コミット**
   ```bash
   git add docker/postgres/Dockerfile
-  git commit -m "feat: update postgres dockerfile to copy init-db script"
+  git commit -m "feat: PostgreSQLのDockerfileに初期化スクリプトのコピーを追加"
   ```
 
 ---
@@ -88,14 +88,14 @@
 - 変更: [compose.yaml](file:///Users/oki2a24/laravel-boilerplate/compose.yaml)
 
 - [ ] **ステップ 1: compose.yaml の書き換え**
-  `db` サービスの `environment` 設定に `APP_ENV` を追加します。
+  `db` サービスの `environment` 設定に `CREATE_TEST_DB` を追加します。
   
   ```yaml
     db:
       build:
         context: ./docker/postgres
       environment:
-        - APP_ENV=${APP_ENV:-local}
+        - CREATE_TEST_DB=${CREATE_TEST_DB:-true}
         - LANG=C.UTF-8
         - POSTGRES_PASSWORD=${DB_PASSWORD}
         - POSTGRES_USER=${DB_USERNAME}
@@ -107,7 +107,7 @@
 - [ ] **ステップ 2: コミット**
   ```bash
   git add compose.yaml
-  git commit -m "feat: pass APP_ENV to db container in compose.yaml"
+  git commit -m "feat: compose.yamlでdbコンテナにCREATE_TEST_DBを渡すよう設定"
   ```
 
 ---
@@ -137,7 +137,7 @@
 - [ ] **ステップ 2: コミット**
   ```bash
   git add phpunit.xml
-  git commit -m "test: configure phpunit to use laravel_test postgres database"
+  git commit -m "test: PHPUnitのテスト用DBにlaravel_testを使用するよう設定"
   ```
 
 ---
@@ -201,11 +201,11 @@
   
   追加する内容:
   ```markdown
-  - **テスト環境でのデータベース分離**: ローカルテスト実行時は必ず PostgreSQL の `laravel_test` データベースを使用する構成になっており、開発DB `laravel` を破壊しないよう設計されています。テストを高速化する目的であっても、勝手にインメモリ SQLite 等へテスト設定を切り替えてはいけません。
+  - **テスト環境でのデータベース分離**: ローカルテスト実行時は必ず PostgreSQL の `laravel_test` データベースを使用する構成になっており、開発DB `laravel` を破壊しないよう設計されています。環境変数 `CREATE_TEST_DB=true` によって自動で準備されます。テストを高速化する目的であっても、勝手にインメモリ SQLite 等へテスト設定を切り替えてはいけません。
   ```
 
 - [ ] **ステップ 3: コミット**
   ```bash
   git add README.md GEMINI.md AGENTS.md
-  git commit -m "docs: document test database isolation for developers and AI agents"
+  git commit -m "docs: 開発者およびAI向けにテストDB分離構成のドキュメントを追加"
   ```
