@@ -53,12 +53,17 @@ graph TD
     fi
     ```
 
-### B. Docker Compose設定の更新
-*   **ファイル名:** [compose.yaml](file:///Users/oki2a24/laravel-boilerplate/compose.yaml)
-*   **変更内容:**
-    1.  `db` サービスに `APP_ENV` 環境変数を追加し、ホスト（または `.env`）から引き渡します。
-    2.  `init-db.sh` を `/docker-entrypoint-initdb.d/` ディレクトリにマウントします。
-*   **設定例:**
+### B. DockerfileとDocker Compose設定の更新
+初期化スクリプトをボリュームマウントではなく、イメージビルド時にイメージ内部へ直接組み込みます（本番・ローカルを通じたポータビリティと信頼性の担保のため）。
+
+*   **Dockerfile変更 (`docker/postgres/Dockerfile`):**
+    ```dockerfile
+    FROM postgres:16.10
+    COPY init-db.sh /docker-entrypoint-initdb.d/
+    RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh
+    ```
+*   **Docker Compose変更 ([compose.yaml](file:///Users/oki2a24/laravel-boilerplate/compose.yaml)):**
+    `db` サービスに `APP_ENV` 環境変数を追加し、ホスト（または `.env`）から引き渡します（ボリュームマウントは不要です）。
     ```yaml
       db:
         build:
@@ -71,8 +76,6 @@ graph TD
           - POSTGRES_DB=${DB_DATABASE}
           - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C.UTF-8
           - TZ=Asia/Tokyo
-        volumes:
-          - ./docker/postgres/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh  # 追加
     ```
 
 ### C. PHPUnit設定の更新
@@ -92,6 +95,15 @@ graph TD
         <env name="TELESCOPE_ENABLED" value="false"/>
       </php>
     ```
+
+### D. ドキュメンテーションと学習用ナレッジの整備
+人間および今後のAIエージェントが、本構成（手動確認用DBとテスト用DBの分離、本番でのテストDB作成防止）を正しく理解し、次回以降の開発に活用できるようにナレッジを蓄積します。
+
+*   **対象ファイル:**
+    1.  [README.md](file:///Users/oki2a24/laravel-boilerplate/README.md)（人間用ドキュメント）
+        「テスト環境のセットアップとデータ分離について」の項目を追加し、テスト用DBが独立していること、および既存ボリュームの再作成方法を明記します。
+    2.  [GEMINI.md](file:///Users/oki2a24/laravel-boilerplate/GEMINI.md) / [AGENTS.md](file:///Users/oki2a24/laravel-boilerplate/AGENTS.md)（AIエージェント用ドキュメント）
+        「データベースの分離ルール（ローカルでは必ず PostgreSQL で `laravel_test` を使用すること。SQLite への切り替えは原則行わないこと）」を指示として追記し、エージェントが前提知識として学習できるようにします。
 
 ---
 
