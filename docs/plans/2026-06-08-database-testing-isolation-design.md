@@ -40,8 +40,8 @@ graph TD
     #!/bin/bash
     set -e
 
-    # APP_ENV が local または testing の場合のみテストDBを作成
-    if [ "$APP_ENV" = "local" ] || [ "$APP_ENV" = "testing" ]; then
+    # CREATE_TEST_DB が true の場合のみテストDBを作成
+    if [ "$CREATE_TEST_DB" = "true" ]; then
         echo "Creating testing database: laravel_test..."
         psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
             CREATE DATABASE laravel_test;
@@ -49,7 +49,7 @@ graph TD
     EOSQL
         echo "Testing database created successfully."
     else
-        echo "Skipping testing database creation (APP_ENV=$APP_ENV)"
+        echo "Skipping testing database creation (CREATE_TEST_DB=$CREATE_TEST_DB)"
     fi
     ```
 
@@ -63,13 +63,13 @@ graph TD
     RUN chmod +x /docker-entrypoint-initdb.d/init-db.sh
     ```
 *   **Docker Compose変更 ([compose.yaml](file:///Users/oki2a24/laravel-boilerplate/compose.yaml)):**
-    `db` サービスに `APP_ENV` 環境変数を追加し、ホスト（または `.env`）から引き渡します（ボリュームマウントは不要です）。
+    `db` サービスに `CREATE_TEST_DB` 環境変数を追加し、ホスト（または `.env`）から引き渡します。
     ```yaml
       db:
         build:
           context: ./docker/postgres
         environment:
-          - APP_ENV=${APP_ENV:-local}  # 追加
+          - CREATE_TEST_DB=${CREATE_TEST_DB:-true}  # 追加（デフォルトは true）
           - LANG=C.UTF-8
           - POSTGRES_PASSWORD=${DB_PASSWORD}
           - POSTGRES_USER=${DB_USERNAME}
