@@ -43,7 +43,8 @@
 
 *   **構成の経緯**: 過去、`.env` の衝突を避けるために Laravel をサブディレクトリに置いていたが、現在は Docker Compose の `env_file` 機能を活用し、Laravel をプロジェクトルートに配置する構成に移行済みである。
 *   **禁止事項**: `generalist` サブエージェントの使用は禁止。全ての作業はメインエージェントが直接実行し、`git status` 確認と小まめなコミットを通じて透明性を維持すること。
-*   **技術スタックの管理**: 具体的なパッケージバージョンや規律は、下の `<laravel-boost-guidelines>` に集約されている。`php artisan boost:update` によりこれらは自動更新されるため、手動でのバージョン記述は避けること。
+* **技術スタックの管理**: 具体的なパッケージバージョンや規律は、下の `<laravel-boost-guidelines>` に集約されている。`php artisan boost:update` によりこれらは自動更新されるため、手動でのバージョン記述は避けること。
+* **DBの分離**: テスト実行時は `laravel_test` データベースが使用されます。
 
 <laravel-boost-guidelines>
 === foundation rules ===

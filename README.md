@@ -88,9 +88,16 @@ make npm-dev
 | `make npm-dev` | Vite 開発サーバーの起動 |
 | `make npm-lint-format` | フロントエンドのリントとフォーマット |
 
----
+### テストデータベースの分離について
+本プロジェクトでは、ローカル手動確認データと自動テストデータを分離するため、同一の PostgreSQL 内に以下の2つのDBを作成しています。
+- `laravel`: 手動動作確認用DB
+- `laravel_test`: 自動テスト（PHPUnit）用DB
 
-## 🤖 AI (Gemini/Boost) との連携
+テストを実行しても手動確認用のデータは削除されません。
+もしテスト用DBが作成されていない場合は、以下のコマンドでボリュームを削除して再ビルドを行ってください。
+```bash
+docker compose down -v && make up
+```
 
 このプロジェクトは **Laravel Boost** を導入しており、Gemini 等の AI エージェントがコードベースを深く理解できるように最適化されています。
 

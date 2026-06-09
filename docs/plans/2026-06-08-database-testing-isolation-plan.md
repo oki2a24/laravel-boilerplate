@@ -32,7 +32,7 @@
 **ファイル:**
 - 新規作成: `docker/postgres/init-db.sh`
 
-- [ ] **ステップ 1: スクリプトファイルの作成**
+- [x] **ステップ 1: スクリプトファイルの作成**
   以下の内容でファイルを作成します。
   
   ```bash
@@ -65,7 +65,7 @@
 **ファイル:**
 - 変更: `docker/postgres/Dockerfile`
 
-- [ ] **ステップ 1: Dockerfile の書き換え**
+- [x] **ステップ 1: Dockerfile の書き換え**
   `init-db.sh` をイメージの `/docker-entrypoint-initdb.d/` にコピーし、実行権限を付与する命令を追加します。
 
   ```dockerfile
