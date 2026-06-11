@@ -1,7 +1,9 @@
 {
     "agents": [
         "gemini",
-        "opencode"
+        "opencode",
+        "claude_code",
+        "codex"
     ],
     "guidelines": true,
     "mcp": true,
