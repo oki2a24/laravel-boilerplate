@@ -1,19 +1,19 @@
 # 🚀 Laravel Modern Boilerplate
 
 [![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel)](https://laravel.com)
-[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-badge&logo=vue.js)](https://vuejs.org)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker)](https://www.docker.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 Laravel 13 を RESTful API サーバーとし、Vue.js 3 + Vite によるモダンな SPA を統合したフルスタック・ボイラープレートです。
-開発効率を最大化するための Docker 環境、静的解析ツール、そして AI (Gemini) との高度な連携機能を備えています。
+開発効率を最大化するための Docker 環境、静的解析ツール、そして AI (Gemini, Claude Code, Codex 等) との高度な連携機能を備えています。
 
 ---
 
 ## 🏗️ 技術スタック
 
 ### Backend (Laravel 13 Ecosystem)
-- **Framework:** Laravel 13 (PHP 8.3+)
+- **Framework:** Laravel 13 (PHP 8.4+)
 - **Auth:** Laravel Sanctum (SPA Authentication)
 - **Analysis:** Larastan (Static Analysis), Laravel Pint (Code Style)
 - **Testing:** PHPUnit 13
@@ -99,11 +99,21 @@ make npm-dev
 docker compose down -v && make up
 ```
 
-このプロジェクトは **Laravel Boost** を導入しており、Gemini 等の AI エージェントがコードベースを深く理解できるように最適化されています。
+---
 
-- **AI コンテキストサーバー:** `make php-boost-mcp` で MCP サーバーを起動できます。
-- **ガイドラインの更新:** `make php-boost-update` で最新のコーディング規約を同期します。
-- **指示書:** 詳細な規律は `GEMINI.md` に記載されています。
+## 🤖 AI Agent Optimization (Laravel Boost)
+
+このプロジェクトは **Laravel Boost** によって最適化されており、生成AIエージェント（Gemini, Claude Code, Codex 等）がコードベースを深く理解し、プロジェクト固有のベストプラクティスに従って作業できるように設計されています。
+
+### 対応エージェント
+- Gemini (詳細は `GEMINI.md` を参照)
+- Claude Code / Codex
+- OpenCode
+
+### AI 連携コマンド
+AI エージェントのコンテキスト精度を維持するために、以下の操作が推奨されます：
+- **MCP サーバ起動:** `make php-boost-mcp` で MCP (Model Context Protocol) サーバを起動し、エージェントにプロジェクト構造やスキーマを提供します。
+- **ガイドライン同期:** `make php-boost-update` を実行して、AI 用の規約とスキル情報を最新の状態に保ちます。
 
 ---
 
