@@ -18,7 +18,7 @@ class StoreTest extends TestCase
             'password' => bcrypt($password = 'i-love-laravel'),
         ]);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/v1/login', [
             'email' => $user->email,
             'password' => $password,
         ]);
@@ -34,7 +34,7 @@ class StoreTest extends TestCase
             'password' => bcrypt('i-love-laravel'),
         ]);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/v1/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);

@@ -18,7 +18,7 @@ class DestroyTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->postJson('/api/logout');
+            ->postJson('/api/v1/logout');
 
         $response->assertStatus(204);
         $this->assertGuest();

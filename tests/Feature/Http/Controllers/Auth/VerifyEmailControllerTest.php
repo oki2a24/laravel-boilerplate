@@ -22,7 +22,7 @@ class VerifyEmailControllerTest extends TestCase
         Event::fake();
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'api.v1.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id,
@@ -46,7 +46,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = User::factory()->create();
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'api.v1.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id,
@@ -66,7 +66,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = User::factory()->create();
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'api.v1.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id + 1,
@@ -86,7 +86,7 @@ class VerifyEmailControllerTest extends TestCase
         $user = User::factory()->create();
 
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'api.v1.verification.verify',
             now()->addMinutes(60),
             [
                 'id' => $user->id,

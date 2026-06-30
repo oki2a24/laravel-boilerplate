@@ -19,7 +19,7 @@ class StoreTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->postJson('/api/email/verification-notification');
+            ->postJson('/api/v1/email/verification-notification');
 
         // レスポンスを確認
         $response->assertAccepted();
@@ -40,7 +40,7 @@ class StoreTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->postJson('/api/email/verification-notification');
+            ->postJson('/api/v1/email/verification-notification');
 
         // レスポンスを確認
         $response->assertNoContent();
