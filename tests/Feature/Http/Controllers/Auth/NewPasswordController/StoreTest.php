@@ -24,7 +24,7 @@ class StoreTest extends TestCase
         $token = Password::createToken($user);
         $newPassword = 'new-password!!!!!';
 
-        $response = $this->postJson('/api/reset-password', [
+        $response = $this->postJson('/api/v1/reset-password', [
             'token' => $token,
             'email' => $user->email,
             'password' => $newPassword,
@@ -53,7 +53,7 @@ class StoreTest extends TestCase
             'password' => Hash::make($oldPassword),
         ]);
 
-        $response = $this->postJson('/api/reset-password', [
+        $response = $this->postJson('/api/v1/reset-password', [
             'token' => 'invalid-token',
             'email' => $user->email,
             'password' => 'new-password!!!!!',

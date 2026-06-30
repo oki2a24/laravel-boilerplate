@@ -20,7 +20,7 @@ class StoreTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->postJson('/api/forgot-password', ['email' => $user->email]);
+        $response = $this->postJson('/api/v1/forgot-password', ['email' => $user->email]);
 
         $response->assertOk();
         Notification::assertSentTo($user, ResetPassword::class);
@@ -29,7 +29,7 @@ class StoreTest extends TestCase
     #[Test]
     public function メールアドレスが存在しない場合はエラーを返すこと(): void
     {
-        $response = $this->postJson('/api/forgot-password', ['email' => 'test@example.com']);
+        $response = $this->postJson('/api/v1/forgot-password', ['email' => 'test@example.com']);
 
         $response->assertStatus(422);
     }

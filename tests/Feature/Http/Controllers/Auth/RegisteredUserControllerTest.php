@@ -17,7 +17,7 @@ class RegisteredUserControllerTest extends TestCase
     {
         Event::fake();
 
-        $response = $this->postJson('/api/register', [
+        $response = $this->postJson('/api/v1/register', [
             'name' => 'ユーザー登録テスト',
             'email' => 'test@example.com',
             'password' => 'password',
