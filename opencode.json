@@ -5,9 +5,8 @@
             "type": "local",
             "enabled": true,
             "command": [
-                "php",
-                "artisan",
-                "boost:mcp"
+                "make",
+                "php-boost-mcp"
             ]
         }
     }

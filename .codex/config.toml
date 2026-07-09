@@ -1,4 +1,4 @@
 [mcp_servers.laravel-boost]
-command = "php"
-args = ["artisan", "boost:mcp"]
-cwd = "/var/www/html"
+command = "make"
+args = ["php-boost-mcp"]
+cwd = "/Users/oki2a24/laravel-boilerplate"
