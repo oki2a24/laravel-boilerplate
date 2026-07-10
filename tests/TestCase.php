@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         $manifestPath = public_path('build/manifest.json');
-        if (!file_exists($manifestPath)) {
+        if (! file_exists($manifestPath)) {
             @mkdir(public_path('build'), 0777, true);
             file_put_contents($manifestPath, json_encode(['resources/js/app.js' => ['file' => 'js/app.js', 'src' => 'resources/js/app.js', 'isEntry' => true]]));
             $this->createdManifest = $manifestPath;
