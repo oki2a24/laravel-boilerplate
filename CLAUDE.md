@@ -176,3 +176,6 @@ This project has domain-specific skills available. You MUST activate the relevan
 - To filter on a particular test name: `php artisan test --compact --filter=testName` (recommended after making a change to a related file).
 
 </laravel-boost-guidelines>
+
+## Project Policies
+- [Upgrade Policy (AI Collaboration)](docs/policies/upgrade-policy.md)

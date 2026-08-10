@@ -16,18 +16,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Node.js
 RUN apt-get update && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y nodejs=24.* \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  libicu-dev \
-  libjpeg-dev \
-  libpng-dev \
-  libpq-dev \
-  libzip-dev
-  unzip \
+  libicu-dev=76.* \
+  libjpeg62-turbo-dev=1:2.1.* \
+  libpng-dev=1.6.* \
+  libpq-dev=17.* \
+  libzip-dev=1.11.* \
+  unzip=6.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-configure \
   gd --with-jpeg \
@@ -61,14 +61,14 @@ RUN a2ensite my-ssl \
 
 # cron
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  busybox-static \
+  busybox-static=1:1.37.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY ./crontabs/app /var/spool/cron/crontabs/app
 RUN ln -sf /dev/stdout /var/log/cron
 
 # Supervisor
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  supervisor \
+  supervisor=4.* \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN cp -a /etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf.org
 COPY ./supervisor/supervisord.conf /etc/supervisor/supervisord.conf
