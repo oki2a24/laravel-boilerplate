@@ -33,6 +33,8 @@ npm-lint:
 	docker compose exec --user=app app npm run lint
 npm-format:
 	docker compose exec --user=app app npm run format
+npm-build:
+	docker compose exec --user=app app npm run build
 
 php-boost-update: ## Update Laravel Boost resources (Guidelines/Skills)
 	docker compose exec --user=app app php artisan boost:update
