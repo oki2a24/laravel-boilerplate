@@ -14,10 +14,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Node.js
-RUN apt-get update && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup_24.x | bash - \
-    && apt-get install -y nodejs=24.* \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  ca-certificates \
+  curl \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* \
+  && curl -fsSL https://deb.nodesource.com/setup_24.x -o /tmp/nodesource_setup.sh \
+  && bash /tmp/nodesource_setup.sh \
+  && rm -f /tmp/nodesource_setup.sh \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends nodejs=24.* \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP
 COPY --from=composer /usr/bin/composer /usr/bin/composer
