@@ -5,11 +5,15 @@
         "claude_code",
         "codex"
     ],
+    "cloud": true,
     "guidelines": true,
     "mcp": true,
     "nightwatch_mcp": false,
     "sail": false,
     "skills": [
-        "laravel-best-practices"
+        "infer-conventions",
+        "deploying-to-cloud",
+        "laravel-best-practices",
+        "testing-best-practices"
     ]
 }
