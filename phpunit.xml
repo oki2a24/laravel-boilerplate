@@ -13,7 +13,14 @@
     <env name="BCRYPT_ROUNDS" value="4"/>
     <env name="CACHE_DRIVER" value="array"/>
     <env name="DB_CONNECTION" value="pgsql"/>
-    <env name="DB_DATABASE" value="laravel_test"/>
+    <!--
+      DB_DATABASE=laravel_test は app コンテナに実環境変数（$_SERVER）としては
+      存在しない名前に出るため、force="true" の上書きが有効に機能する。
+      .env.docker は DB_* を注入してはならない（設計理由は .env.docker.example
+      のコメント参照）。ここを force 無しにする・DB_* を注入する変更は
+      テストが開発DBに migrate する事故を再生するので不可。
+    -->
+    <env name="DB_DATABASE" value="laravel_test" force="true"/>
     <env name="MAIL_MAILER" value="array"/>
     <env name="QUEUE_CONNECTION" value="sync"/>
     <env name="SESSION_DRIVER" value="array"/>

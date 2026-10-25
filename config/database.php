@@ -88,7 +88,19 @@ return [
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
+            // DB名の決定順位（この順序が厳守される意図があるため変更の際は
+            // コメント一式を読むこと）:
+            //   ① DB_DATABASE … テスト専用の上書き窓口。phpunit.xml が
+            //      force="true" で laravel_test を入れる唯一の経路。
+            //      実環境変数（$_SERVER）として注入される名前は phpunit の
+            //      force で上書きできないため、app コンテナに DB_DATABASE
+            //      等の DB_* を env_file 注入してはならない（.env.docker の
+            //      設計コメント参照）。
+            //   ② POSTGRES_DB … 開発・本番のDB名。唯一の実値定義は
+            //      .env.docker（本番は本番用 env ファイル）の POSTGRES_DB。
+            //      Laravel は②が無い時だけ読む（毎日常用のパスではない）。
+            //   ③ laravel … どちらも無い時（コンテナ外実行など）の最終保険。
+            'database' => env('DB_DATABASE') ?? env('POSTGRES_DB') ?? 'laravel',
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),

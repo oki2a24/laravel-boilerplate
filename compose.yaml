@@ -2,6 +2,12 @@
 # 新しいサービスを追加するときは `<<: *env_file` の1行を入れるだけで済む。
 # 注意: 各サービスの ${VAR} 補間は行わない（compose は dotenv に依存しない）。
 #       変数の値はすべて .env.docker（コンテナ注入口）にリテラルで記載する。
+#
+# 警告: .env.docker の内容は全サービスに「全量注入」される（選択的な注入は
+# 不可能）。Laravel が読む名前（DB_DATABASE 等）を .env.docker に追加すると
+# 実環境変数（$_SERVER）として phpunit の force 上書きに勝ってしまい、テストが
+# 開発DBに migrate する事故になる。認証情報・DB名は POSTGRES_* に単一定義し、
+# Laravel 向けにはパス無しの DB_URL で渡すこと（詳細は .env.docker.example 参照）。
 x-env-file: &env_file
   env_file:
     - .env.docker
