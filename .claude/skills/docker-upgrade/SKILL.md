@@ -1,6 +1,6 @@
 ---
 name: docker-image-upgrade
-description: "Docker イメージ（ベースイメージ）のバージョンアップを行う前に、必ず docs/DOCKER_UPDATE_GUIDE.md と docs/policies/upgrade-policy.md を読む。Use when Docker image version needs to be updated or upgraded for security and compatibility."
+description: "Docker イメージ（ベースイメージ）のバージョンアップを行う前に、必ず docs/DOCKER_UPDATE_GUIDE.md と docs/policies/upgrade-policy.md を読む。セキュリティや互換性のためにイメージ版を更新するときに使用（Docker image version update, security patch, compatibility）。"
 license: MIT
 metadata:
   author: oki2a24

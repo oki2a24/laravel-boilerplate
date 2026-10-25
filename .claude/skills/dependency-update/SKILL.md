@@ -1,6 +1,6 @@
 ---
 name: dependency-update
-description: "PHP (composer) または Node (npm) の依存パッケージを更新する際に使用。Use when PHP (composer) or Node (npm) package dependencies need updating for security, features, or compatibility."
+description: "PHP (composer) または Node (npm) の依存パッケージを更新する際に使用。セキュリティ、機能、互換性のために依存版を更新するときに使用（PHP (composer) or Node (npm) package dependencies need updating for security, features, or compatibility）。"
 license: MIT
 metadata:
   author: oki2a24
