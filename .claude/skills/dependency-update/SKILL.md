@@ -1,42 +1,37 @@
 ---
 name: dependency-update
-description: "Use when PHP (composer) or Node (npm) package dependencies need to be updated for security, features, or compatibility."
+description: "PHP (composer) または Node (npm) の依存パッケージを更新する際に使用。Use when PHP (composer) or Node (npm) package dependencies need updating for security, features, or compatibility."
 license: MIT
 metadata:
   author: oki2a24
 ---
 
-# Dependency Update
+# 依存パッケージ更新 (dependency-update)
 
-Use this skill when PHP or Node package dependencies need updating to maintain security and compatibility.
+`composer update` または `npm update` の実行をガイドするスキル。
+作成動機：依存パッケージの更新を手順なしに行うリスク（テスト忘れ、非推奨警告の放置、コミットの一貫性喪失）を防ぐ。
 
-## When to Use This Skill
+## いつ使用するか
+- `composer.json` / `package.json` の依存に新しいパッチ/マイナー版があるとき
+- セキュリティパッチを反映する必要があるとき
+- ベースイメージのアップデートに伴い依存を調整するとき
 
-Use this skill when:
-- `composer.json` or `package.json` dependencies have available updates
-- Security patches for Laravel, PHP libraries, or frontend dependencies require updates
-- Project base image updates may require dependency adjustments
-- Dependency versions need verification and testing after updates
+## コアパターン
+1. **依存確認**: `composer show --direct` / `npm list --depth=0` で現在版を確認。
+2. **更新実行**: コンテナ内で `composer update` / `npm update` を実行。
+3. **再ビルド**: `docker compose build --no-cache`（必要に応じて）。
+4. **インスペクト**: `apt-cache policy` / `composer show` で実際のパッケージ版を確認。
+5. **検証**: `make php-test` でテストを通過させる。
+6. **コミット**: Conventional Commits + 日本語 Body（なぜそうしたか）。
 
-## Process Overview
+## クイックリファレンス
+| 対象 | コマンド | ピン方針 |
+|---|---|---|
+| PHP 依存 | `composer update` | `composer.json` の制約に従う |
+| Node 依存 | `npm update` | `package.json` の `^` に従う |
+| 確認 | `composer show --direct` | － |
 
-1. Read upgrade documentation (`docs/DOCKER_UPDATE_GUIDE.md`, `docs/policies/upgrade-policy.md`).
-2. Check current dependency versions (`composer show`, `npm list`).
-3. Update dependencies (`composer update`, `npm update`).
-4. Rebuild containers and run tests.
-5. Inspect installed versions and adjust pinning if needed.
-6. Commit changes.
-
-## Workflow
-
-- Update `composer.json` / `package.json` via `composer update` or `npm update`.
-- Rebuild with `docker compose build --no-cache`.
-- Inspect installed versions (`apt-cache policy`, `composer show`).
-- Verify functionality with `make php-test`.
-- Commit with Conventional Commits and Japanese body.
-
-## Related Skills
-
-- `docker-image-upgrade` for Docker base image updates
-- `laravel-best-practices` for Laravel code adjustments
-- `systematic-debugging` for troubleshooting issues
+## よくある間違い
+- `composer update` の後に `make php-test` を省略する（非推奨警告を見逃す）。
+- `npm update` 後に `npm run build` やテストを忘れる。
+- 更新理由をコミット本文に記載せず、なぜそうしたかを残さない。

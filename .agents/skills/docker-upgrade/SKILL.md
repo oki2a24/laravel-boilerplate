@@ -1,43 +1,39 @@
 ---
 name: docker-image-upgrade
-description: "Use when Docker image version needs to be updated or upgraded. Guides through the documented upgrade process for maintaining security and compatibility in Docker images."
+description: "Docker イメージ（ベースイメージ）のバージョンアップを行う前に、必ず docs/DOCKER_UPDATE_GUIDE.md と docs/policies/upgrade-policy.md を読む。Use when Docker image version needs to be updated or upgraded for security and compatibility."
 license: MIT
 metadata:
   author: oki2a24
 ---
 
-# Docker Image Upgrade
+# Docker イメージアップデート (docker-image-upgrade)
 
-Use this skill when Docker image version needs to be updated or upgraded. This skill guides through the documented upgrade process for maintaining security and compatibility in Docker images.
+Docker イメージのバージョンアップを安全に行うためのスキル。
+作成動機：アップデート依頼時に `docs/DOCKER_UPDATE_GUIDE.md` を読まずに Dockerfile を直接編集してしまう失敗（RED ベースライン）を防ぐ。
 
-## When to Use This Skill
+## いつ使用するか
+- Docker ベースイージェントのアップデートを行うとき
+- PHP / PostgreSQL / Composer など公式イメージのバージョンを変えるとき
+- アップデート後、実際の `apt` パッケージ版（`libicu-dev` 等）を確認しピン留めを調整するとき
 
-Use this skill when:
-- Docker image version needs to be updated or upgraded
-- Base images need updating for security patches or feature compatibility
-- Dockerfile needs modification for version upgrades
-- Docker Compose configuration needs adjustment for version changes
+## コアパターン
+1. **ガイド確認**: `docs/DOCKER_UPDATE_GUIDE.md` + `docs/policies/upgrade-policy.md` を読む。
+2. **現バージョン確認**: `docker/php/Dockerfile`, `docker/postgres/Dockerfile` の `FROM` を確認。
+3. **対象版決定**: Docker Hub で最新パッチ版を確認（メジャー切替は要レビュー）。
+4. **更新**: `FROM` をパッチ版まで固定（`php:8.5.12` のように）。apt パッケージは `X.*` ワイルドカード維持。
+5. **ビルド**: `make build` / `docker compose build --no-cache`.
+6. **インスペクト**: `apt-cache policy` で実際版確認 → メジャーが変わったら `X.*` ピンを更新。
+7. **検証**: `make php-test` 通過後コミット。
 
-## Core Principle
+## クイックリファレンス
+| 対象 | 方針 |
+|---|---|
+| ベースイメージ (`FROM`) | パッチ版固定 (`php:8.5.12`) |
+| apt パッケージ | メジャー版ワイルドカード (`libicu-dev=76.*`) |
+| 確認コマンド | `apt-cache policy <pkg>` |
+| 検証コマンド | `make php-test` |
 
-Before updating any Docker image, always consult the documented upgrade process in `docs/DOCKER_UPDATE_GUIDE.md` and `docs/policies/upgrade-policy.md` to ensure consistent version handling and pinning strategies.
-
-## Process Overview
-
-1. Read the upgrade documentation (`docs/DOCKER_UPDATE_GUIDE.md`, `docs/policies/upgrade-policy.md`).
-2. Check current Docker image versions in Dockerfiles and docker-compose files.
-3. Determine target version from official sources or requirements.
-4. Update Dockerfiles with new version specifications.
-5. Rebuild and validate images.
-6. Verify installed versions and update pinning if needed.
-
-## Workflow
-
-- **Base images**: Pin to latest patch version (e.g., `php:8.5.12`).
-- **System packages**: Use major-version wildcard pinning (e.g., `libicu-dev=76.*`).
-- **After update**: Inspect installed versions in container (`apt-cache policy`) and adjust pins accordingly.
-- **Verify**: Run `docker compose build` and run tests before finalizing.
-
-## Related Skills
-
-- Laravel best practices, testing best practices, and systematic debugging when handling upgrade-related changes.
+## よくある間違い
+- ガイド未読で直接 `FROM` を書き換える（→メジャーごとのピン留め方針に反する）。
+- apt パッケージをピン固定し過ぎる（パッチ版ピン留めは不要、`X.*` に任せる）。
+- アップデート後テストを省略する。
