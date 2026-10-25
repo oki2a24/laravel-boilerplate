@@ -1,11 +1,17 @@
+# すべてのサービスに共通の env_file（.env.docker を唯一の供給源とする）。
+# 新しいサービスを追加するときは `<<: *env_file` の1行を入れるだけで済む。
+# 注意: 各サービスの ${VAR} 補間は行わない（compose は dotenv に依存しない）。
+#       変数の値はすべて .env.docker（コンテナ注入口）にリテラルで記載する。
+x-env-file: &env_file
+  env_file:
+    - .env.docker
+
 services:
   app:
+    <<: *env_file
     build:
       context: ./docker/php
-    env_file:
-      - .env.docker
     environment:
-      - DB_URL=pgsql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_DATABASE}?charset=utf8&prefix_indexes=true&schema=public&sslmode=prefer
       - LANG=C.UTF-8
       - TZ=Asia/Tokyo
     volumes:
@@ -19,13 +25,10 @@ services:
     working_dir: /var/www/html
 
   db:
+    <<: *env_file
     build:
       context: ./docker/postgres
     environment:
       - LANG=C.UTF-8
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C.UTF-8
-      - CREATE_TEST_DB=${CREATE_TEST_DB:-true}
       - TZ=Asia/Tokyo
