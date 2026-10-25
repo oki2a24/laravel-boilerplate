@@ -5,7 +5,6 @@ services:
     env_file:
       - .env.docker
     environment:
-      - APP_AXIOS_BASEURL=${APP_AXIOS_BASEURL}
       - DB_URL=pgsql://${DB_USERNAME}:${DB_PASSWORD}@db:5432/${DB_DATABASE}?charset=utf8&prefix_indexes=true&schema=public&sslmode=prefer
       - LANG=C.UTF-8
       - TZ=Asia/Tokyo
